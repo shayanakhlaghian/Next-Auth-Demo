@@ -15,16 +15,18 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.username || !credentials?.password) return null;
-        const { username, password } = credentials;
+        const { username: receivedUsername, password: receivedPassword } =
+          credentials;
 
-        const user = USERS.find(({ username: user }) => user === username);
+        const user = USERS.find(
+          ({ username }) => username === receivedUsername
+        );
         if (!user) return null;
-        if (user.password !== password) return null;
 
-        return {
-          id: user.id,
-          username: user.username,
-        };
+        const { id, username, password } = user;
+        if (password !== receivedPassword) return null;
+
+        return { id, username };
       },
     }),
   ],
