@@ -14,17 +14,19 @@ export const authOptions: AuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        if (!credentials?.username || !credentials?.password) return null;
+        if (!credentials?.username || !credentials?.password)
+          throw new Error('username and password are required.');
         const { username: receivedUsername, password: receivedPassword } =
           credentials;
 
         const user = USERS.find(
           ({ username }) => username === receivedUsername
         );
-        if (!user) return null;
+        if (!user) throw new Error('username or password is wrong.');
 
         const { id, username, password } = user;
-        if (password !== receivedPassword) return null;
+        if (password !== receivedPassword)
+          throw new Error('username or password is wrong.');
 
         return { id, username };
       },
