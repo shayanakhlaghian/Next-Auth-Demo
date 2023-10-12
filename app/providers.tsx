@@ -2,7 +2,7 @@
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 
-import { NavProvider } from './context/nav-context';
+import { NavProvider } from '@/context/nav-context';
 
 const queryClient = new QueryClient();
 

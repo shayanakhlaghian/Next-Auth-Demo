@@ -1,7 +1,7 @@
 'use client';
 import { useContext } from 'react';
 
-import { NavContext } from '../context/nav-context';
+import { NavContext } from '@/context/nav-context';
 import NavList from './NavList';
 
 const MobileNav = () => {
